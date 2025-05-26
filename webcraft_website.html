@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebCraft Digital - Creiamo il tuo sito web perfetto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 2rem 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,800 1000,1000"/></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 2rem;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 2rem;
+            background: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .team-member {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: scale(1.05);
+        }
+        
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            padding: 80px 2rem;
+            background: #f8f9fa;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .portfolio-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 2rem;
+            background: #333;
+            color: white;
+        }
+        
+        .contact-content {
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Scroll Animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">WebCraft Digital</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#servizi">Servizi</a></li>
+                <li><a href="#chi-siamo">Chi Siamo</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Il tuo sito web perfetto</h1>
+            <p>Creiamo siti web belli, veloci e che funzionano davvero. Per la tua azienda, il tuo negozio, la tua professione.</p>
+            <a href="#contatti" class="cta-button">Iniziamo insieme</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servizi" class="services">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">I nostri servizi</h2>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">🌐</div>
+                    <h3>Siti Web</h3>
+                    <p>Siti internet professionali, belli da vedere e facili da usare. Perfetti per presentare la tua attività.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">🛒</div>
+                    <h3>E-commerce</h3>
+                    <p>Negozi online completi per vendere i tuoi prodotti. Sicuri, veloci e facili da gestire.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">📱</div>
+                    <h3>Design Responsive</h3>
+                    <p>I tuoi siti funzionano perfettamente su computer, tablet e smartphone. Sempre.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">🔍</div>
+                    <h3>Ottimizzazione SEO</h3>
+                    <p>Ti aiutiamo a farti trovare su Google dai tuoi clienti. Più visibilità, più business.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">🛠️</div>
+                    <h3>Supporto Continuo</h3>
+                    <p>Non ti lasciamo mai solo. Aggiornamenti, backup e supporto quando ne hai bisogno.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">⚡</div>
+                    <h3>Siti Veloci</h3>
+                    <p>I nostri siti caricano in un lampo. I tuoi visitatori non aspetteranno mai.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="chi-siamo" class="about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Chi siamo</h2>
+            <div class="about-content">
+                <div class="team-member animate-on-scroll">
+                    <div class="member-photo">TT</div>
+                    <h3>Tobias Tesauri</h3>
+                    <p><strong>CEO & Lead Developer</strong></p>
+                    <p>Il nostro mago del codice. Trasforma le idee in siti web funzionanti. Esperto in tutte le tecnologie moderne.</p>
+                </div>
+                <div class="team-member animate-on-scroll">
+                    <div class="member-photo">FC</div>
+                    <h3>Federico Cazzulo</h3>
+                    <p><strong>COO & Creative Director</strong></p>
+                    <p>Il nostro artista digitale. Crea design che catturano l'attenzione e conquistano i clienti.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;" class="animate-on-scroll">
+                <p style="font-size: 1.2rem; color: #666;">Siamo due amici che hanno trasformato la loro passione per il web in un business. Trattiamo ogni progetto come se fosse il nostro primo, con cura e attenzione ai dettagli.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">I nostri lavori</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item animate-on-scroll">
+                    <div class="portfolio-image">
+                        Ristorante "Da Mario"
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Ristorante Da Mario</h3>
+                        <p>Sito web con menù online e prenotazioni. +150% di prenotazioni online.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item animate-on-scroll">
+                    <div class="portfolio-image">
+                        Studio Legale Rossi
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Studio Legale Rossi</h3>
+                        <p>Sito professionale per studio legale. Design elegante e form contatti.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item animate-on-scroll">
+                    <div class="portfolio-image">
+                        Shop "Moda Italiana"
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Moda Italiana Shop</h3>
+                        <p>E-commerce completo per abbigliamento. Gestione magazzino e pagamenti.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contatti" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title" style="color: white;">Parliamone insieme</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Hai un'idea? Raccontacela! Ti risponderemo entro 4 ore.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item animate-on-scroll">
+                        <h3>📧 Email</h3>
+                        <p>info@webcraft-digital.it</p>
+                        <p>Rispondiamo sempre entro 4 ore</p>
+                    </div>
+                    <div class="contact-item animate-on-scroll">
+                        <h3>📞 Telefono</h3>
+                        <p>+39 345 123 4567</p>
+                        <p>Lun-Ven 9:00-18:00</p>
+                    </div>
+                    <div class="contact-item animate-on-scroll">
+                        <h3>💬 WhatsApp</h3>
+                        <p>+39 345 123 4567</p>
+                        <p>Per messaggi veloci</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 3rem;">
+                    <a href="mailto:info@webcraft-digital.it" class="cta-button">Scrivici ora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 WebCraft Digital S.r.l. - Creiamo il web che funziona</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7;">P.IVA: 12345678901 - Made with ❤️ in Italy</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling per i link di navigazione
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animazione scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Osserva tutti gli elementi con la classe animate-on-scroll
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Effetto parallax leggero per l'hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
